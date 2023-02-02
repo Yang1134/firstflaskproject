@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+
+
+<title>Group-C5</title>
+    
+        <!-- Custom fonts for this template-->
+        <link href="Public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static', filename='Public/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+  
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+    
+        <!-- Custom styles for this template-->
+        <link href="Public/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="{{url_for('static', filename='Public/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="Public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='Public/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body id="page-top">
+   
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Dashboard.html">
+                <div class="sidebar-brand-text mx-3">Group-C5</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link " href="{{url_for('dashboard')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{url_for('to_sprintboard_table')}}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>SprintBoard</span>
+                </a>
+            </li>
+ 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{url_for('members')}}">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Members</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{url_for('logout')}}">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Sign Out</span>
+                </a>
+            </li>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between ">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    </div>   
+                    
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-end">
+
+                        <a href="{{url_for('add_html')}}"><button type="button" class="btn btn-outline-primary mx-3 my-3">Add Task</button></a>
+
+                    </div>
+                    <div class="row">
+                        
+                        <!-- Table -->
+                        <div class="col-xl col-lg">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Task</h6>
+                                    <!-- Tag Filter dropdown list -->
+                                    <div class="dropdown">
+                                        <button onclick="myFunction()" class="dropbtn"><i class="fa fa-filter mx-1" style="font-size:18px"></i></button>
+                                        <div id="myDropdown" class="dropdown-content">
+                                        <a href="/by_all">All</a>
+                                        <a href="/by_testing">Testing</a>
+                                        <a href="/by_core">Core</a>
+                                        <a href="/by_ui">UI</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="links">
+                                    <ul>
+                                        <li data-view="list-view" class="li-list active">
+                                        <i class="fas fa-th-list"></i>
+                                        <a>List View</a></li>
+                                        <li data-view="grid-view" class="li-grid">
+                                        <i class="fas fa-th-large"></i>
+                                        <a href="{{url_for('showgrid')}}">Grid View</a></li>
+                                    </ul>
+                                </div>
+
+                                </form>
+
+                                <div class="card-body" >
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered dataTable display" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Tag</th>
+                                                    <th>Story Point</th>
+                                                    <th>Priorty</th>
+                                                    <th>Action</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for task in tasks %}
+                                                    <tr>
+                                                        <td>{{ task.id }}</td>
+                                                        <td>{{ task.Name }}</td>
+                                                        <td>{{ task.Tag }}</td>
+                                                        <td>{{ task.Story_Point }}</td>
+                                                        <td class=" align-middle text-success">
+                                                            {{ task.Priority }}
+                                                        </td>
+                                                        <td>
+                                                            <a href="/delete/{{task.id}}">Delete</a>
+                                                            <br>
+                                                            <a href="/update/{{task.id}}">Update</a>
+                                                        </td>
+                                                    </tr>
+
+                                            {% endfor %}
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Content Row -->
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+
+</div>
+<!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Project Hawk 2022</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+<!-- Bootstrap core JavaScript-->
+<script src="Public/vendor/jquery/jquery.min.js"></script>
+<script src="Public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{url_for('static', filename='Public/vendor/jquery/jquery.min.js')}}"></script>   
+<script src="{{url_for('static', filename='Public/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+
+<!-- Core plugin JavaScript-->
+<script src="Public/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="{{url_for('static', filename='Public/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="Public/js/sb-admin-2.min.js"></script>
+<script src="{{url_for('static', filename='Public/js/sb-admin-2.min.js')}}"></script>
+
+<!-- Page level plugins -->
+<script src="Public/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="Public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="{{url_for('static', filename='Public/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{url_for('static', filename='Public/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+<!-- Page level custom scripts -->
+<script src="Public/js/demo/datatables-demo.js"></script>
+<script src="{{url_for(endpoint='static', filename='Public/js/demo/datatables-demo.js')}}"></script>
+
+<!-- Filter dropdown-->
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    
+    function filterFunction() {
+      var input, filter, ul, li, a, i;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      div = document.getElementById("myDropdown");
+      a = div.getElementsByTagName("a");
+      for (i = 0; i < a.length; i++) {
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          a[i].style.display = "";
+        } else {
+          a[i].style.display = "none";
+        }
+      }
+    }
+</script>
+    
+
+</body>
+
+</html>
+
